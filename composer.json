@@ -1,0 +1,32 @@
+{
+	"name": "figtree-php/exceptions",
+	"description": "FigTree Exceptions",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Alan Ondra",
+			"email": "r.alan.ondra@gmail.com",
+			"role": "Creator"
+		}
+	],
+	"support": {
+		"email": "figtree.php@gmail.com",
+		"source": "https://github.com/figtree-php/exceptions",
+		"issues": "https://github.com/figtree-php/exceptions/issues",
+		"wiki": "https://github.com/figtree-php/exceptions/wiki"
+	},
+	"autoload": {
+		"psr-4": {
+			"FigTree\\Exceptions\\": "src/",
+			"FigTree\\Exceptions\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"psr/log": "^1.1"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.6",
+		"phpunit/phpunit": "^9.5"
+	}
+}
