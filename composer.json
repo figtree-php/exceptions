@@ -1,6 +1,11 @@
 {
 	"name": "figtree-php/exceptions",
 	"description": "FigTree Exceptions",
+	"keywords": [
+		"figtree",
+		"figtree-php",
+		"exceptions"
+	],
 	"type": "library",
 	"license": "MIT",
 	"authors": [
@@ -22,7 +27,9 @@
 			"FigTree\\Exceptions\\Tests\\": "tests/"
 		}
 	},
-	"require": {},
+	"require": {
+		"php": "^8.0"
+	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.6",
 		"phpunit/phpunit": "^9.5"
