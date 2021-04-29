@@ -19,17 +19,13 @@ class HeadersSentException extends LogicException implements SevereExceptionInte
 	/**
 	 * Exception thrown when headers have already been sent when attempting to emit HTTP content.
 	 *
-	 * @param string $file File name where the Exception is being thrown.
-	 * @param int $line File line where the Exception is being thrown.
 	 * @param int $code The Exception code.
 	 * @param \Throwable $previous The previous throwable used for the exception chaining.
 	 */
 	
-	public function __construct(string $file = null, int $line = null, int $code = 0, Throwable $previous = null)
+	public function __construct(int $code = 0, Throwable $previous = null)
 	{
-		$message = (is_null($file))
-			? 'Headers already sent.'
-			: sprintf('Headers already sent @ %s:%d.', $file, $line ?? 0);
+		$message = 'Headers already sent.';
 
 		parent::__construct($message, $code, $previous);
 	}
