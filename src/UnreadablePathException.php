@@ -5,7 +5,10 @@ namespace FigTree\Exceptions;
 use Throwable;
 use RuntimeException;
 use FigTree\Exceptions\Contracts\SevereExceptionInterface;
-use FigTree\Exceptions\Concerns\HasSeverity;
+use FigTree\Exceptions\Concerns\{
+	HasSeverity,
+	SetsLocation,
+};
 
 /**
  * Exception thrown when a path is not readable.
@@ -13,6 +16,7 @@ use FigTree\Exceptions\Concerns\HasSeverity;
 class UnreadablePathException extends RuntimeException implements SevereExceptionInterface
 {
 	use HasSeverity;
+	use SetsLocation;
 
 	protected int $severity = E_RECOVERABLE_ERROR;
 

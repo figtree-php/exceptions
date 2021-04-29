@@ -5,7 +5,10 @@ namespace FigTree\Exceptions;
 use Throwable;
 use LogicException;
 use FigTree\Exceptions\Contracts\SevereExceptionInterface;
-use FigTree\Exceptions\Concerns\HasSeverity;
+use FigTree\Exceptions\Concerns\{
+	HasSeverity,
+	SetsLocation,
+};
 
 /**
  * Exception thrown when headers have already been sent when attempting to emit HTTP content.
@@ -13,6 +16,7 @@ use FigTree\Exceptions\Concerns\HasSeverity;
 class HeadersSentException extends LogicException implements SevereExceptionInterface
 {
 	use HasSeverity;
+	use SetsLocation;
 
 	protected int $severity = E_ERROR;
 
