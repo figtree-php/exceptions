@@ -15,8 +15,12 @@ trait SetsLocation
 	public function onFileLine(string $file, int $line)
 	{
 		if (file_exists($file)) {
-			$this->file = $file;
-			$this->line = max(0, $line);
+			if (property_exists($this, 'file')) {
+				$this->file = $file;
+			}
+			if (property_exists($this, 'line')) {
+				$this->line = max(0, $line);
+			}
 		}
 
 		return $this;
