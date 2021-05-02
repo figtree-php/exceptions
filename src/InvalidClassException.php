@@ -3,20 +3,12 @@
 namespace FigTree\Exceptions;
 
 use Throwable;
-use LogicException;
-use FigTree\Exceptions\Contracts\{
-	SevereExceptionInterface,
-	LocatableExceptionInterface,
-};
-use FigTree\Exceptions\Concerns\HasSeverity;
 
 /**
  * Exception thrown when a class does not exist.
  */
-class InvalidClassException extends LogicException implements SevereExceptionInterface, LocatableExceptionInterface
+class InvalidClassException extends LogicException
 {
-	use HasSeverity;
-
 	/**
 	 * Exception thrown when a class does not exist.
 	 *
@@ -29,23 +21,5 @@ class InvalidClassException extends LogicException implements SevereExceptionInt
 		$message = sprintf('%s is not a valid class name.', $inputClass);
 
 		parent::__construct($message, $code, $previous);
-	}
-
-	/**
-	 * If required, set the file and line where the Exception was thrown.
-	 *
-	 * @param string $file
-	 * @param int $line
-	 *
-	 * @return $this
-	 */
-	public function onFileLine(string $file, int $line): LocatableExceptionInterface
-	{
-		if (file_exists($file)) {
-			$this->file = $file;
-			$this->line = max(0, $line);
-		}
-
-		return $this;
 	}
 }

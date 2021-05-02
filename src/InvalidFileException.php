@@ -3,20 +3,12 @@
 namespace FigTree\Exceptions;
 
 use Throwable;
-use RuntimeException;
-use FigTree\Exceptions\Contracts\{
-	SevereExceptionInterface,
-	LocatableExceptionInterface,
-};
-use FigTree\Exceptions\Concerns\HasSeverity;
 
 /**
  * Exception thrown when a path is expected to be a file but is not a file.
  */
-class InvalidFileException extends RuntimeException implements SevereExceptionInterface, LocatableExceptionInterface
+class InvalidFileException extends RuntimeException
 {
-	use HasSeverity;
-
 	/**
 	 * Exception thrown when a path is expected to be a file but is not a file.
 	 *
@@ -31,23 +23,5 @@ class InvalidFileException extends RuntimeException implements SevereExceptionIn
 		$message = sprintf('Path %s is not a file.', $path);
 
 		parent::__construct($message, $code, $previous);
-	}
-
-	/**
-	 * If required, set the file and line where the Exception was thrown.
-	 *
-	 * @param string $file
-	 * @param int $line
-	 *
-	 * @return $this
-	 */
-	public function onFileLine(string $file, int $line): LocatableExceptionInterface
-	{
-		if (file_exists($file)) {
-			$this->file = $file;
-			$this->line = max(0, $line);
-		}
-
-		return $this;
 	}
 }

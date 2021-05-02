@@ -3,20 +3,12 @@
 namespace FigTree\Exceptions;
 
 use Throwable;
-use RuntimeException;
-use FigTree\Exceptions\Contracts\{
-	SevereExceptionInterface,
-	LocatableExceptionInterface,
-};
-use FigTree\Exceptions\Concerns\HasSeverity;
 
 /**
  * Exception thrown when a path is not readable.
  */
-class UnreadablePathException extends RuntimeException implements SevereExceptionInterface, LocatableExceptionInterface
+class UnreadablePathException extends RuntimeException
 {
-	use HasSeverity;
-
 	/**
 	 * Exception thrown when a path is not readable.
 	 *
@@ -31,23 +23,5 @@ class UnreadablePathException extends RuntimeException implements SevereExceptio
 		$message = sprintf('%s is not readable.', $filename);
 
 		parent::__construct($message, $code, $previous);
-	}
-
-	/**
-	 * If required, set the file and line where the Exception was thrown.
-	 *
-	 * @param string $file
-	 * @param int $line
-	 *
-	 * @return $this
-	 */
-	public function onFileLine(string $file, int $line): LocatableExceptionInterface
-	{
-		if (file_exists($file)) {
-			$this->file = $file;
-			$this->line = max(0, $line);
-		}
-
-		return $this;
 	}
 }
