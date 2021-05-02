@@ -4,21 +4,18 @@ namespace FigTree\Exceptions;
 
 use Throwable;
 use LogicException;
-use FigTree\Exceptions\Contracts\SevereExceptionInterface;
-use FigTree\Exceptions\Concerns\{
-	HasSeverity,
-	SetsLocation,
+use FigTree\Exceptions\Contracts\{
+	SevereExceptionInterface,
+	LocatableExceptionInterface,
 };
+use FigTree\Exceptions\Concerns\HasSeverity;
 
 /**
  * Exception thrown when a value is not of an expected type.
  */
-class UnexpectedTypeException extends LogicException implements SevereExceptionInterface
+class UnexpectedTypeException extends LogicException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
-	use SetsLocation;
-
-	protected int $severity = E_ERROR;
 
 	/**
 	 * Exception thrown when a value is not of an expected type.
@@ -37,5 +34,23 @@ class UnexpectedTypeException extends LogicException implements SevereExceptionI
 		);
 
 		parent::__construct($message, $code, $previous);
+	}
+
+	/**
+	 * If required, set the file and line where the Exception was thrown.
+	 *
+	 * @param string $file
+	 * @param int $line
+	 *
+	 * @return $this
+	 */
+	public function onFileLine(string $file, int $line): LocatableExceptionInterface
+	{
+		if (file_exists($file)) {
+			$this->file = $file;
+			$this->line = max(0, $line);
+		}
+
+		return $this;
 	}
 }

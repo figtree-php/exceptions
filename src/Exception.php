@@ -3,21 +3,31 @@
 namespace FigTree\Exceptions;
 
 use Exception as PHPException;
-use FigTree\Exceptions\Concerns\{
-	HasSeverity,
-	SetsLocation,
+use FigTree\Exceptions\Concerns\HasSeverity;
+use FigTree\Exceptions\Contracts\{
+	SevereExceptionInterface,
+	LocatableExceptionInterface,
 };
-use FigTree\Exceptions\Contracts\SevereExceptionInterface;
 
-class Exception extends PHPException implements SevereExceptionInterface
+class Exception extends PHPException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
-	use SetsLocation;
 
 	/**
-	 * Exception severity level.
+	 * If required, set the file and line where the Exception was thrown.
 	 *
-	 * @var int
+	 * @param string $file
+	 * @param int $line
+	 *
+	 * @return $this
 	 */
-	protected int $severity = E_ERROR;
+	public function onFileLine(string $file, int $line): LocatableExceptionInterface
+	{
+		if (file_exists($file)) {
+			$this->file = $file;
+			$this->line = max(0, $line);
+		}
+
+		return $this;
+	}
 }

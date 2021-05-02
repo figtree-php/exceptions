@@ -4,6 +4,8 @@ namespace FigTree\Exceptions\Concerns;
 
 trait HasSeverity
 {
+	protected int $severity = E_ERROR;
+
 	/**
 	 * Get the PHP severity level associated with the Exception.
 	 *
@@ -11,6 +13,6 @@ trait HasSeverity
 	 */
 	public function getSeverity(): int
 	{
-		return $this->severity ?? E_ERROR;
+		return $this->severity;
 	}
 }
