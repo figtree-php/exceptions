@@ -6,6 +6,8 @@ use Throwable;
 use FigTree\Exceptions\{
 	Contracts\LocatableExceptionInterface,
 	Contracts\SevereExceptionInterface,
+	BadFunctionCallException,
+	BadMethodCallException,
 	DomainException,
 	Exception,
 	HeadersSentException,
@@ -14,10 +16,12 @@ use FigTree\Exceptions\{
 	InvalidDirectoryException,
 	InvalidFileException,
 	InvalidPathException,
+	LengthException,
 	LogicException,
 	OutOfBoundsException,
 	OutOfRangeException,
 	OutputSentException,
+	RangeException,
 	RuntimeException,
 	UnexpectedTypeException,
 	UnexpectedValueException,
@@ -26,6 +30,58 @@ use FigTree\Exceptions\{
 
 class ExceptionTest extends AbstractTestCase
 {
+	/**
+	 * @small
+	 */
+	public function testBadFunctionCallException()
+	{
+		$message = 'Test Exception';
+
+		$file = __FILE__;
+		$line = __LINE__;
+
+		$exc = (new BadFunctionCallException($message, 1337, new Exception()))
+			->onFileLine($file, $line);
+
+		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\BadFunctionCallException::class, $exc);
+		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
+		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
+
+		$this->assertEquals($message, $exc->getMessage());
+		$this->assertEquals(1337, $exc->getCode());
+		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
+		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals($file, $exc->getFile());
+		$this->assertEquals($line, $exc->getLine());
+	}
+
+	/**
+	 * @small
+	 */
+	public function testBadMethodCallException()
+	{
+		$message = 'Test Exception';
+
+		$file = __FILE__;
+		$line = __LINE__;
+
+		$exc = (new BadMethodCallException($message, 1337, new Exception()))
+			->onFileLine($file, $line);
+
+		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\BadMethodCallException::class, $exc);
+		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
+		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
+
+		$this->assertEquals($message, $exc->getMessage());
+		$this->assertEquals(1337, $exc->getCode());
+		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
+		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals($file, $exc->getFile());
+		$this->assertEquals($line, $exc->getLine());
+	}
+
 	/**
 	 * @small
 	 */
@@ -40,6 +96,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\DomainException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -65,6 +122,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\Exception::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -88,6 +146,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LogicException::class, $exc);
+		$this->assertInstanceOf(LogicException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -113,6 +173,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\InvalidArgumentException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -136,6 +197,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LogicException::class, $exc);
+		$this->assertInstanceOf(LogicException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -159,6 +222,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RuntimeException::class, $exc);
+		$this->assertInstanceOf(RuntimeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -182,6 +247,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RuntimeException::class, $exc);
+		$this->assertInstanceOf(RuntimeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -205,6 +272,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RuntimeException::class, $exc);
+		$this->assertInstanceOf(RuntimeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -212,6 +281,32 @@ class ExceptionTest extends AbstractTestCase
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
 		$this->assertEquals(E_RECOVERABLE_ERROR, $exc->getSeverity());
+		$this->assertEquals($file, $exc->getFile());
+		$this->assertEquals($line, $exc->getLine());
+	}
+
+	/**
+	 * @small
+	 */
+	public function testLengthException()
+	{
+		$message = 'Test Exception';
+
+		$file = __FILE__;
+		$line = __LINE__;
+
+		$exc = (new LengthException($message, 1337, new Exception()))
+			->onFileLine($file, $line);
+
+		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LengthException::class, $exc);
+		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
+		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
+
+		$this->assertEquals($message, $exc->getMessage());
+		$this->assertEquals(1337, $exc->getCode());
+		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
+		$this->assertEquals(E_ERROR, $exc->getSeverity());
 		$this->assertEquals($file, $exc->getFile());
 		$this->assertEquals($line, $exc->getLine());
 	}
@@ -230,6 +325,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LogicException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -255,6 +351,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\OutOfBoundsException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -280,6 +377,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\OutOfRangeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -303,10 +401,38 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LogicException::class, $exc);
+		$this->assertInstanceOf(LogicException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
 		$this->assertEquals('Output already sent.', $exc->getMessage());
+		$this->assertEquals(1337, $exc->getCode());
+		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
+		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals($file, $exc->getFile());
+		$this->assertEquals($line, $exc->getLine());
+	}
+
+	/**
+	 * @small
+	 */
+	public function testRangeException()
+	{
+		$message = 'Test Exception';
+
+		$file = __FILE__;
+		$line = __LINE__;
+
+		$exc = (new RangeException($message, 1337, new Exception()))
+			->onFileLine($file, $line);
+
+		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RangeException::class, $exc);
+		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
+		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
+
+		$this->assertEquals($message, $exc->getMessage());
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
 		$this->assertEquals(E_ERROR, $exc->getSeverity());
@@ -328,6 +454,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RuntimeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -351,6 +478,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\LogicException::class, $exc);
+		$this->assertInstanceOf(LogicException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -376,6 +505,7 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\UnexpectedValueException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
@@ -399,6 +529,8 @@ class ExceptionTest extends AbstractTestCase
 			->onFileLine($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\RuntimeException::class, $exc);
+		$this->assertInstanceOf(RuntimeException::class, $exc);
 		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
