@@ -10,12 +10,15 @@ use FigTree\Exceptions\Contracts\{
 	LocatableExceptionInterface,
 };
 
+/**
+ * Exception thrown if an error which can only be found on runtime occurs.
+ */
 class RuntimeException extends PHPRuntimeException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
 
 	/**
-	 * Exception thrown when headers have already been sent when attempting to emit HTTP content.
+	 * Exception thrown if an error which can only be found on runtime occurs.
 	 *
 	 * @param string $message The Exception message to throw.
 	 * @param int $code The Exception code.

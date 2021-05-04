@@ -10,12 +10,19 @@ use FigTree\Exceptions\Contracts\{
 	LocatableExceptionInterface,
 };
 
+/**
+ * Exception thrown if a value does not match with a set of values.
+ * Typically this happens when a function calls another function and expects the return value
+ * to be of a certain type or value not including arithmetic or buffer related errors.
+ */
 class UnexpectedValueException extends PHPUnexpectedValueException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
 
 	/**
-	 * Exception thrown when headers have already been sent when attempting to emit HTTP content.
+	 * Exception thrown if a value does not match with a set of values.
+	 * Typically this happens when a function calls another function and expects the return value
+	 * to be of a certain type or value not including arithmetic or buffer related errors.
 	 *
 	 * @param string $message The Exception message to throw.
 	 * @param int $code The Exception code.

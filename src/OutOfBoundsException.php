@@ -10,12 +10,17 @@ use FigTree\Exceptions\Contracts\{
 	LocatableExceptionInterface,
 };
 
+/**
+ * Exception thrown if a value is not a valid key.
+ * This represents errors that cannot be detected at compile time.
+ */
 class OutOfBoundsException extends PHPOutOfBoundsException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
 
 	/**
-	 * Exception thrown when headers have already been sent when attempting to emit HTTP content.
+	 * Exception thrown if a value is not a valid key.
+	 * This represents errors that cannot be detected at compile time.
 	 *
 	 * @param string $message The Exception message to throw.
 	 * @param int $code The Exception code.

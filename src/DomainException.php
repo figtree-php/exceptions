@@ -9,6 +9,9 @@ use FigTree\Exceptions\Contracts\{
 	LocatableExceptionInterface,
 };
 
+/**
+ * Exception thrown if a value does not adhere to a defined valid data domain.
+ */
 class DomainException extends PHPDomainException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;

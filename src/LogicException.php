@@ -10,12 +10,17 @@ use FigTree\Exceptions\Contracts\{
 	LocatableExceptionInterface,
 };
 
+/**
+ * Exception that represents error in the program logic.
+ * This kind of exception should lead directly to a fix in your code.
+ */
 class LogicException extends PHPLogicException implements SevereExceptionInterface, LocatableExceptionInterface
 {
 	use HasSeverity;
 
 	/**
-	 * Exception thrown when headers have already been sent when attempting to emit HTTP content.
+	 * Exception that represents error in the program logic.
+	 * This kind of exception should lead directly to a fix in your code.
 	 *
 	 * @param string $message The Exception message to throw.
 	 * @param int $code The Exception code.
@@ -23,9 +28,9 @@ class LogicException extends PHPLogicException implements SevereExceptionInterfa
 	 */
 	public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
 	{
-		$this->severity = E_ERROR;
-
 		parent::__construct($message, $code, $previous);
+
+		$this->severity = E_ERROR;
 	}
 
 	/**
