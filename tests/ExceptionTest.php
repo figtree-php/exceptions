@@ -21,6 +21,7 @@ use FigTree\Exceptions\{
 	OutOfBoundsException,
 	OutOfRangeException,
 	OutputSentException,
+	OverflowException,
 	RangeException,
 	RuntimeException,
 	UnexpectedTypeException,
@@ -407,6 +408,32 @@ class ExceptionTest extends AbstractTestCase
 		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
 
 		$this->assertEquals('Output already sent.', $exc->getMessage());
+		$this->assertEquals(1337, $exc->getCode());
+		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
+		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals($file, $exc->getFile());
+		$this->assertEquals($line, $exc->getLine());
+	}
+
+	/**
+	 * @small
+	 */
+	public function testOverflowException()
+	{
+		$message = 'Test Exception';
+
+		$file = __FILE__;
+		$line = __LINE__;
+
+		$exc = (new OverflowException($message, 1337, new Exception()))
+			->onFileLine($file, $line);
+
+		$this->assertInstanceOf(Throwable::class, $exc);
+		$this->assertInstanceOf(\OverflowException::class, $exc);
+		$this->assertInstanceOf(SevereExceptionInterface::class, $exc);
+		$this->assertInstanceOf(LocatableExceptionInterface::class, $exc);
+
+		$this->assertEquals($message, $exc->getMessage());
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
 		$this->assertEquals(E_ERROR, $exc->getSeverity());
