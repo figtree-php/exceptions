@@ -18,10 +18,10 @@ class UnreadablePathException extends RuntimeException
 	 */
 	public function __construct(string $filename, int $code = 0, Throwable $previous = null)
 	{
-		$this->severity = E_RECOVERABLE_ERROR;
-
 		$message = sprintf('%s is not readable.', $filename);
 
 		parent::__construct($message, $code, $previous);
+
+		$this->severity = E_RECOVERABLE_ERROR;
 	}
 }

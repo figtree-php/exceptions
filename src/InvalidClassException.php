@@ -21,5 +21,7 @@ class InvalidClassException extends LogicException
 		$message = sprintf('%s is not a valid class name.', $inputClass);
 
 		parent::__construct($message, $code, $previous);
+
+		$this->severity = E_ERROR;
 	}
 }

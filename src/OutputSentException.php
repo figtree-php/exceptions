@@ -20,5 +20,7 @@ class OutputSentException extends LogicException
 		$message = 'Output already sent.';
 
 		parent::__construct($message, $code, $previous);
+
+		$this->severity = E_ERROR;
 	}
 }

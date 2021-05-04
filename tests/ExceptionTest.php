@@ -46,7 +46,7 @@ class ExceptionTest extends AbstractTestCase
 		$this->assertEquals($message, $exc->getMessage());
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
-		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals(E_RECOVERABLE_ERROR, $exc->getSeverity());
 		$this->assertEquals($file, $exc->getFile());
 		$this->assertEquals($line, $exc->getLine());
 	}
@@ -71,7 +71,7 @@ class ExceptionTest extends AbstractTestCase
 		$this->assertEquals($message, $exc->getMessage());
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
-		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals(E_RECOVERABLE_ERROR, $exc->getSeverity());
 		$this->assertEquals($file, $exc->getFile());
 		$this->assertEquals($line, $exc->getLine());
 	}
@@ -286,7 +286,7 @@ class ExceptionTest extends AbstractTestCase
 		$this->assertEquals($message, $exc->getMessage());
 		$this->assertEquals(1337, $exc->getCode());
 		$this->assertInstanceOf(Exception::class, $exc->getPrevious());
-		$this->assertEquals(E_ERROR, $exc->getSeverity());
+		$this->assertEquals(E_RECOVERABLE_ERROR, $exc->getSeverity());
 		$this->assertEquals($file, $exc->getFile());
 		$this->assertEquals($line, $exc->getLine());
 	}

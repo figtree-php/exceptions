@@ -18,10 +18,10 @@ class InvalidDirectoryException extends RuntimeException
 	 */
 	public function __construct(string $path, int $code = 0, Throwable $previous = null)
 	{
-		$this->severity = E_RECOVERABLE_ERROR;
-
 		$message = sprintf('Path %s is not a directory.', $path);
 
 		parent::__construct($message, $code, $previous);
+
+		$this->severity = E_RECOVERABLE_ERROR;
 	}
 }

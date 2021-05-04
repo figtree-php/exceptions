@@ -4,7 +4,7 @@ namespace FigTree\Exceptions\Concerns;
 
 trait HasSeverity
 {
-	protected int $severity = E_ERROR;
+	protected int $severity = E_RECOVERABLE_ERROR;
 
 	/**
 	 * Get the PHP severity level associated with the Exception.
