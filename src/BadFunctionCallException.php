@@ -39,7 +39,7 @@ class BadFunctionCallException extends PHPBadFunctionCallException implements Se
 	 *
 	 * @return $this
 	 */
-	public function onFileLine(string $file, int $line): LocatableExceptionInterface
+	public function setLocation(string $file, int $line): LocatableExceptionInterface
 	{
 		if (file_exists($file)) {
 			$this->file = $file;

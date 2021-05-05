@@ -42,7 +42,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new BadFunctionCallException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\BadFunctionCallException::class, $exc);
@@ -68,7 +68,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new BadMethodCallException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\BadMethodCallException::class, $exc);
@@ -94,7 +94,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new DomainException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\DomainException::class, $exc);
@@ -120,7 +120,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new Exception($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\Exception::class, $exc);
@@ -144,7 +144,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new HeadersSentException(1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LogicException::class, $exc);
@@ -171,7 +171,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new InvalidArgumentException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\InvalidArgumentException::class, $exc);
@@ -195,7 +195,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new InvalidClassException('FakeClass', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LogicException::class, $exc);
@@ -220,7 +220,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new InvalidDirectoryException('/foo/bar/file.txt', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RuntimeException::class, $exc);
@@ -245,7 +245,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new InvalidFileException('/foo/bar', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RuntimeException::class, $exc);
@@ -270,7 +270,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new InvalidPathException('/foo/bar', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RuntimeException::class, $exc);
@@ -297,7 +297,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new LengthException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LengthException::class, $exc);
@@ -323,7 +323,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new LogicException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LogicException::class, $exc);
@@ -349,7 +349,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new OutOfBoundsException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\OutOfBoundsException::class, $exc);
@@ -375,7 +375,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new OutOfRangeException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\OutOfRangeException::class, $exc);
@@ -399,7 +399,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new OutputSentException(1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LogicException::class, $exc);
@@ -426,7 +426,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new OverflowException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\OverflowException::class, $exc);
@@ -452,7 +452,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new RangeException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RangeException::class, $exc);
@@ -478,7 +478,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new RuntimeException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RuntimeException::class, $exc);
@@ -502,7 +502,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new UnexpectedTypeException(1, 'string', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\LogicException::class, $exc);
@@ -529,7 +529,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new UnexpectedValueException($message, 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\UnexpectedValueException::class, $exc);
@@ -553,7 +553,7 @@ class ExceptionTest extends AbstractTestCase
 		$line = __LINE__;
 
 		$exc = (new UnreadablePathException('/foo/bar', 1337, new Exception()))
-			->onFileLine($file, $line);
+			->setLocation($file, $line);
 
 		$this->assertInstanceOf(Throwable::class, $exc);
 		$this->assertInstanceOf(\RuntimeException::class, $exc);

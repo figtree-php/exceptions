@@ -12,5 +12,5 @@ interface LocatableExceptionInterface
 	 *
 	 * @return $this
 	 */
-	public function onFileLine(string $file, int $line): LocatableExceptionInterface;
+	public function setLocation(string $file, int $line): LocatableExceptionInterface;
 }
